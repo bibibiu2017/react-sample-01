@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import Button from "../../Button/Button";
 import Card from "../../Card/Card";
-import Modal from "../Modal";
+import ModalOverlay from "../ModalOverlay";
 import classes from "./ErrorModal.module.css";
 
 const ErrorModal = ({ title, message, show, onModalClosed, ...props }) => {
@@ -11,11 +11,10 @@ const ErrorModal = ({ title, message, show, onModalClosed, ...props }) => {
 
   const closeModalHandler = () => {
     errorModalRef.current.hideModal();
-    onModalClosed();
   };
 
   return (
-    <Modal show={show} ref={errorModalRef}>
+    <ModalOverlay show={show} ref={errorModalRef} onModalClosed={onModalClosed}>
       <Card className={classes.modal}>
         <header className={classes.header}>
           <h2>{title}</h2>
@@ -27,7 +26,7 @@ const ErrorModal = ({ title, message, show, onModalClosed, ...props }) => {
           <Button onClick={closeModalHandler}>Okay</Button>
         </footer>
       </Card>
-    </Modal>
+    </ModalOverlay>
   );
 };
 
